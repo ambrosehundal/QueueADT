@@ -1,75 +1,99 @@
-
 #ifndef QUEUE_H
-#define QUEUE_H
-
-
-#include "LinkedList.h"
-#include "Node.h"
-
-
-#add UML notation here
+#define QUEUE_H 
+#include "List.h"
 
 template <class T>
-class Queue : protected LinkedList <T>
+class Queue : protected List<T>
 {
-
-
 public:
-	// default constructor
-	Queue()
-	{
-		LinkedList::LinkedList();
-	}
-
-	
-	Queue(const Queue<T>& q)
-	{
-		LinkedList::LinkedList(q);
-	}
-
-
-
-	//functions
-  //return value at front of queue
-	T checkFront()
-	{
-		return LinkedList::getValue(1);
-	}
-
-	//return value at rear of queue
-	T checkRear()
-	{
-		return LinkedList::getValue(getLength());
-	}
-  
-  //remove a value from the queue
-  	bool dequeue(){
-    
-		return remove();
-	}
-
-  
-  
-	//check if queue is empty or not
-	bool isEmpty()
-	{
-  return LinkedList::isEmpty();
-	}
-
-	//gives queue length
-	int getLength() const
-	{
-		return LinkedList::getLength();
-	}
-
-	//Add an entry to queue
+	Queue();
+	~Queue();
 	bool enqueue();
+	bool dequeue();
+	bool empty();
+	void clear();
+	int size();
+	T front();
+	T rear();
 	
-
-
-
 	
-
-	
+	//operator<<        
+	template <class T>
+	friend std::ostream& operator<< (std::ostream &foo, Queue<T> *ListPtr);
 };
 
+
+// Default Constructor        
+template <class T>
+Queue<T>::Queue() 
+{ 
+	List(); 
+
+}
+
+// Destructor          
+template <class T>
+Queue<T>::~Queue() 
+{ 
+	clear(); 
+}
+
+// enqueue
+// insert an entry onto the queue
+template <class T>
+bool Queue<T>::enqueue(newEntry)
+{
+	return push_back(newEntry);
+}
+
+//dequeue
+//remove an entry from the queue
+template <class T>
+bool Queue<T>::dequeue()
+{
+	return remove(1);
+}
+
+// empty        
+// checks whether the queue is empty or not     
+template <class T>
+bool Queue<T>::empty() 
+{ 
+	return List::empty(); 
+}
+
+
+
+// size         
+template <class T>
+int Queue<T>::size() 
+{ 
+	return List::size(); 
+}
+
+
+// clear          
+template <class T>
+void Queue<T>::clear() 
+{ 
+	List::clear(); 
+}
+
+
+//front
+// returns the first element
+template <class T>
+T Queue<T>::front()
+{
+	return getValue(1);
+}
+
+//rear
+//returns the last value in the queue
+template <class T>
+T Queue<T>::rear()
+{
+	return getValue(size() - 1);
+}
+
+#endif
